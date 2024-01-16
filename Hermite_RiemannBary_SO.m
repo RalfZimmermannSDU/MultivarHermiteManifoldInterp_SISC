@@ -14,7 +14,7 @@ addpath('aux4test/')
 %
 %
 %*** USER PARAMETERS ***
-n1    = 9  % sample resolution in coordinate direction 1
+n1    = 7  % sample resolution in coordinate direction 1
 n2    = 7  % sample resolution in coordinate direction 1
 res   = 76 % resolution for trial space
 delta = 1.0e-5     % delta for finite difference tests
