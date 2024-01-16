@@ -1,20 +1,26 @@
 %
 % This script plots the tea pot figure under the action of 
 % a rotation matrix.
+%
 % In the paper
 % "MULTIVARIATE HERMITE INTERPOLATION ON RIEMANNIAN MANIFOLDS",
 % Zimmermann/Bergmann,
-% this correspinds to FIGURE 7.
+% this corresponds to FIGURE 7.
 %
+% The script is hard coded to illustrate the first 6 matrices along the
+% diagonal in the 2D trial space.
+% For generating the figure, the rotation matrices must be 
+% available in form of an array of matrices called 
+% "ref_mats" in the Matlab workspace.
 %
-% The rotation matrices must be available in form of an
-% array of matrices called "refs_mats" in the workspace
-%
-% To get the list of reference matrices, first run the script
-%    "Hermite_RiemannBary_SO.m"
-%
+% To get the list of reference matrices from the figure,
+% first open the script
+%    "Hermite_RiemannBary_SO.m",
+% set "n1 = 7", 
+% set the boolean variable "do_midpoint_trials = 1"
+% and run the script.
 % 
-%
+% Afterwards, run this script.
 %
 
 %number of pots to plot

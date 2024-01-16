@@ -14,13 +14,25 @@ addpath('aux4test/')
 %
 %
 %*** USER PARAMETERS ***
-n1    = 7  % sample resolution in coordinate direction 1
+n1    = 9  % sample resolution in coordinate direction 1
 n2    = 7  % sample resolution in coordinate direction 1
 res   = 76 % resolution for trial space
 delta = 1.0e-5     % delta for finite difference tests
 tau   = 1.0e-6     % convergence threshold for Riemannian optimization
 index = 1          % check interpolation condition for sample point "index"
 theta = [0.5,0.5]; % correlation weights
+%
+%
+do_midpoint_trials = 1; % boolean: if set to "1", resolution an
+                        % trial space is adjusted so that 
+                        % the tea pot figure on six midpoint trial points
+                        % can be created with the script
+                        % aux4test/plot_t_pot_interp
+                        % hard coded for n1=n2, res = n1-1
+if do_midpoint_trials
+    n2  = n1;
+    res = n1-1;
+end
 %
 %
 % create sample points 
@@ -31,7 +43,7 @@ a = -.5;
 b = .5;
 %
 
-sample_meth = input("Sampling method = 1 (full fac),2(cheby),3(rLHC): ");
+sample_meth = input("Sampling method: 1(full fac),2(cheby),3(rLHC): ");
 
 if sample_meth ==1
     wspace1 = linspace(a,b,n1); %(b-a).*rand(n1,1) + a; 
@@ -53,12 +65,13 @@ elseif sample_meth ==3
 end
 
 
-% trial space
-wspace1_trial = linspace(a,b,res);
-wspace2_trial = linspace(a,b,res);
 
-% for midpoint trials
-if 0
+% Execute the following code block 
+% for doing midpoint trials and creating 
+% the reference data set for producing the tea pot figure.
+if do_midpoint_trials
+    % this code bock creates trial points 
+    % exactly in the midpoints of the two-D sample grid
     for j=1:length(wspace1)-1
         wspace1_trial(j) = wspace1(j) + 0.5*(wspace1(j+1) -wspace1(j));
     end
@@ -66,6 +79,10 @@ if 0
     for j=1:length(wspace2)-1
         wspace2_trial(j) = wspace2(j) + 0.5*(wspace2(j+1) -wspace2(j));
     end
+else
+    % standard trial space
+    wspace1_trial = linspace(a,b,res);
+    wspace2_trial = linspace(a,b,res);
 end
 
 dim = 2; % 2D sample space
@@ -127,8 +144,8 @@ FD_test_coeffs(Wlocs, d1coeffs, d2coeffs, delta, theta, N, dim, 2)
 
 
 
-yinterp = zeros(d,d,res,res);
-refmats = zeros(d,d,res,res);
+yinterp  = zeros(d,d,res,res);
+ref_mats = zeros(d,d,res,res);
 were_there_failed_processes = 0;
 
 % start point for optimization
