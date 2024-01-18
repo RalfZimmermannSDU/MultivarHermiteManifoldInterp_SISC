@@ -23,12 +23,18 @@ index = 1          % check interpolation condition for sample point "index"
 theta = [0.5,0.5]; % correlation weights
 %
 %
-do_midpoint_trials = 1; % boolean: if set to "1", resolution an
-                        % trial space is adjusted so that 
-                        % the tea pot figure on six midpoint trial points
-                        % can be created with the script
-                        % aux4test/plot_t_pot_interp
+do_midpoint_trials = 0; % boolean: if set to "1", 
+%                       % trial points are computed in the midpoints of the
+                        % resolution of the 2D grid cells.
                         % hard coded for n1=n2, res = n1-1
+                        % 
+                        % This is required to reproduce the 
+                        % the tea pot figure that features as Figure 7 in
+                        % the associated SISC paper.
+                        % It is created with the script
+                        % aux4test/plot_t_pot_interp
+                        % For this exact figure, set n1=7 and
+                        % use Chebychev sampling
 if do_midpoint_trials
     n2  = n1;
     res = n1-1;
